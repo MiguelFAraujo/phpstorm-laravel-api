@@ -1,19 +1,19 @@
 # PhpStorm Laravel API Lab
 
 IDE: PhpStorm 2026.2
-Stack: PHP 8.3, Laravel 11, Octane (Swoole/RoadRunner), Composer, Pest, PHPStan, Psalm, MariaDB, Redis
+Stack: PHP 8.3, Laravel 11, Octane (Swoole/RoadRunner), Composer, Pest, PHPStan Level 8, Psalm, MariaDB, Redis
 Integracao Lab: Ollama (code review), n8n (queue workers), MariaDB, Redis, Prometheus/Grafana, Tailscale
 
 ## Visao Geral
 
-Demonstra capacidades do PhpStorm para desenvolvimento PHP moderno:
+Demonstra capacidades do PhpStorm para desenvolvimento PHP moderno de alta performance:
 - PHP 8.3 features (readonly, enums, attributes, typed properties)
 - Laravel 11 + Octane (Swoole/RoadRunner) para alta performance
 - Static analysis: PHPStan Level 8, Psalm
 - Testing: Pest (parallel, watch mode)
 - Xdebug 3 profiling
 - Database tools (migrations, factories, seeders)
-- Lab integration: Ollama AI review, n8n queue processing, observabilidade
+- Integracao lab: Ollama AI review, n8n queue processing, observabilidade
 
 ## Arquitetura
 
@@ -62,20 +62,20 @@ php artisan queue:work --sleep=3 --tries=3
 | Queue Throughput | > 10k jobs/min | 15k jobs/min | Horizon + Redis |
 | PHPStan Level | Level 8 | Pass | PHPStan |
 
-Testado em: Orange Pi 5 (RK3588, 8-core ARM64, 16GB RAM)
-IDE: PhpStorm 2026.2 | PHP: 8.3 | Swoole: 5.1 | OS: Ubuntu 24.04
+> **Hardware de teste**: Daten DQ170UP (Intel Core i5-7600T 2.8GHz, 15GB RAM, Ubuntu 24.04 LTS)
+> **IDE**: PhpStorm 2026.2 | **PHP**: 8.3 | **Swoole**: 5.1 | **OS**: Ubuntu 24.04 LTS
 
 ## Recursos PhpStorm Demonstrados
 
 | Recurso | Configuracao/Arquivo | Descricao |
 |---------|---------------------|-----------|
-| PHPStan/Psalm | phpstan.neon, psalm.xml | Analise estatica nivel maximo |
-| Pest Testing | pest.php, phpunit.xml | Testes paralelos, watch mode, coverage |
-| Xdebug Profiling | .idea/runConfigurations/ | Flamegraphs, call graphs |
-| Octane Config | config/octane.php | Swoole/RoadRunner workers, tasks |
-| Database Tools | .idea/dataSources.xml | Migrations, factories, seeders visual |
-| AI Code Review | scripts/ai_review.php | Ollama analisa diffs PR |
-| Laravel IDE Helper | composer dev:ide-helper | Autocomplete completo |
+| PHPStan/Psalm | `phpstan.neon`, `psalm.xml` | Analise estatica nivel maximo |
+| Pest Testing | `pest.php`, `phpunit.xml` | Testes paralelos, watch mode, coverage |
+| Xdebug Profiling | `.idea/runConfigurations/` | Flamegraphs, call graphs |
+| Octane Config | `config/octane.php` | Swoole/RoadRunner workers, tasks |
+| Database Tools | `.idea/dataSources.xml` | Migrations, factories, seeders visual |
+| AI Code Review | `scripts/ai_review.php` | Ollama analisa diffs PR |
+| Laravel IDE Helper | `composer dev:ide-helper` | Autocomplete completo |
 
 ## Estrutura do Projeto
 
@@ -165,5 +165,5 @@ php -dxdebug.mode=profile -dxdebug.output_dir=/tmp/xdebug artisan octane:start
 ---
 
 Desenvolvido com PhpStorm 2026.2 + Educational Pack BD24G146N7
-Testado no IDT-Lab (MariaDB + Redis + Prometheus + Grafana + Ollama + n8n + Tailscale)
-Parte do Portfolio JetBrains IDE
+Lab-tested on IDT-Lab (Daten DQ170UP + MariaDB + Redis + Prometheus + Grafana + Ollama + n8n + Tailscale)
+Parte do JetBrains IDE Portfolio
