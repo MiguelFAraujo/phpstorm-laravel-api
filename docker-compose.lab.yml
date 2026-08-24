@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: phpstorm-lab-ollama
+    ports:
+      - "11464:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - lab-network
+
+  mariadb:
+    image: mariadb:11.4
+    container_name: phpstorm-lab-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: orangepi0000#
+      MYSQL_DATABASE: phpstorm_lab
+      MYSQL_USER: lab
+      MYSQL_PASSWORD: labpass
+    ports:
+      - "3336:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - lab-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: phpstorm-lab-redis
+    ports:
+      - "6409:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - lab-network
+
+  prometheus:
+    image: prom/prometheus:v2.54.0
+    container_name: phpstorm-lab-prometheus
+    ports:
+      - "9120:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - lab-network
+
+  grafana:
+    image: grafana/grafana:11.0.0
+    container_name: phpstorm-lab-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: orangepi0000#
+    ports:
+      - "3060:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - lab-network
+
+volumes:
+  ollama-data:
+  mariadb-data:
+  redis-data:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  lab-network:
+    driver: bridge
